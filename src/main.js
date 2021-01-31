@@ -19,6 +19,9 @@ import './icons' // icon
 import './permission' // permission control
 import './utils/error-log' // error log
 
+import Viser from 'viser-vue'
+Vue.use(Viser)
+
 import * as filters from './filters' // global filters
 
 /**

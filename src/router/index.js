@@ -106,7 +106,16 @@ export const asyncRoutes = [{
       roles: ['admin'] // 或者只能在子导航中设置角色
     }
   },
-  {
+  {// 登录日志
+    path: 'loginLog',
+    component: () => import('@/views/system/loginLog'),
+    name: 'loginLog',
+    meta: {
+      title: 'loginLog',
+      roles: ['admin'] // 或者只能在子导航中设置角色
+    }
+  },
+  {// 操作日志
     path: 'operationLog',
     component: () => import('@/views/system/operationLog'),
     name: 'operationLog',
