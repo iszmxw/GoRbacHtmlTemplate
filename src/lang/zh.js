@@ -1,6 +1,6 @@
 export default {
   route: {
-    dashboard: '首页',
+    dashboard: '系统首页',
     system: '系统管理',
     'resetPassword': '修改密码',
     'operationLog': '操作日志',
@@ -93,9 +93,9 @@ export default {
     externalLink: '外链'
   },
   navbar: {
+    dashboard: '系统首页',
+    resetPassword: '修改密码',
     logOut: '退出登录',
-    dashboard: '首页',
-    github: '项目地址',
     theme: '换肤',
     size: '布局大小'
   },

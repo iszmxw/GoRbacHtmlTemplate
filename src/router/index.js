@@ -100,6 +100,7 @@ export const asyncRoutes = [{
     path: 'resetPassword',
     component: () => import('@/views/system/resetPassword'),
     name: 'resetPassword',
+    hidden: true,
     meta: {
       title: 'resetPassword',
       roles: ['admin'] // 或者只能在子导航中设置角色
@@ -187,74 +188,6 @@ export const asyncRoutes = [{
     hidden: true,
     meta: {
       title: '添加设备'
-    }
-  }
-  ]
-},
-{ // 财务管理
-  path: '/settlement',
-  component: Layout,
-  redirect: '/settlement/page',
-  alwaysShow: true, // 将始终显示根菜单
-  name: 'settlement',
-  meta: {
-    title: 'settlement',
-    icon: 'money'
-  },
-  children: [{ // 商户结算列表
-    path: 'company_applyList',
-    component: () => import('@/views/settlement/company_applyList'),
-    name: 'company_applyList',
-    meta: {
-      title: 'company_applyList'
-    }
-  },
-  { // 商户审核记录
-    path: 'company_toExamineLog',
-    component: () => import('@/views/settlement/company_toExamineLog'),
-    name: 'company_toExamineLog',
-    meta: {
-      title: 'company_toExamineLog'
-    }
-  }
-  ]
-},
-{ // 消息管理
-  path: '/message',
-  component: Layout,
-  redirect: '/message/page',
-  alwaysShow: true, // 将始终显示根菜单
-  name: 'message',
-  meta: {
-    title: 'message',
-    icon: 'email',
-    badge: 10
-  },
-  children: [{ // 合作消息列表
-    path: 'coopreation_list',
-    component: () => import('@/views/message/coopreation_list'),
-    name: 'coopreation_list',
-    meta: {
-      title: 'coopreation_list',
-      roles: ['admin'] // 或者只能在子导航中设置角色
-    }
-  },
-  { // 客户反馈
-    path: 'hifans_question',
-    component: () => import('@/views/message/hifans_question'),
-    name: 'hifans_question',
-    meta: {
-      title: 'hifans_question',
-      roles: ['admin'] // 或者只能在子导航中设置角色
-    }
-  },
-  { // 平台反馈
-    path: 'suggest_list',
-    component: () => import('@/views/message/suggest_list'),
-    name: 'suggest_list',
-    meta: {
-      title: 'suggest_list',
-      roles: ['admin'] // 或者只能在子导航中设置角色
     }
   }
   ]
