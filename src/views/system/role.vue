@@ -1,55 +1,105 @@
 <template>
-  <div class="app-container">
-    <el-table :data="rolesList" style="width: 100%;margin-top:30px;" border>
-      <el-table-column align="center" label="角色ID" width="220">
-        <template slot-scope="scope">{{ scope.row.id }}</template>
-      </el-table-column>
-      <el-table-column align="center" label="角色名称" width="220">
-        <template slot-scope="scope">{{ scope.row.name }}</template>
-      </el-table-column>
-      <el-table-column align="header-center" label="描述">
-        <template slot-scope="scope">{{ scope.row.desc }}</template>
-      </el-table-column>
-      <el-table-column align="header-center" label="创建时间">
-        <template slot-scope="scope">{{ scope.row.created_at | parseTime('{y}-{m}-{d} {h}:{i}') }}</template>
-      </el-table-column>
-      <el-table-column align="center" label="操作">
-        <template slot-scope="scope">
-          <el-button type="primary" size="small" @click="handleEdit(scope)">编辑权限</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-
-    <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?'编辑角色':'添加角色'">
-      <el-form :model="role" label-width="80px" label-position="left">
-        <el-form-item label="角色名称">
-          <el-input v-model="role.name" placeholder="角色名称" />
-        </el-form-item>
-        <el-form-item label="描述">
-          <el-input
-            v-model="role.desc"
-            :autosize="{ minRows: 2, maxRows: 4}"
-            type="textarea"
-            placeholder="角色描述"
-          />
-        </el-form-item>
-        <el-form-item label="权限节点">
-          <el-tree
-            ref="tree"
-            :data="routeList"
-            show-checkbox
-            node-key="id"
-            :default-expand-all="true"
-            :default-checked-keys="defaultChecked"
-            :props="defaultProps"
-          />
-        </el-form-item>
-      </el-form>
-      <div style="text-align:right;">
-        <el-button type="danger" @click="dialogVisible=false">{{ $t('permission.cancel') }}</el-button>
-        <el-button type="primary" @click="confirmRole">{{ $t('permission.confirm') }}</el-button>
+  <div class="main">
+    <el-card class="box-card">
+      <div
+        slot="header"
+        class="clearfix"
+      >
+        <span>角色列表</span>
+        <span style="float:right">
+          <router-link to="/role/add">
+            <el-button type="primary">添加角色</el-button>
+          </router-link>
+        </span>
       </div>
-    </el-dialog>
+      <el-table :data="rolesList">
+        <el-table-column
+          align="center"
+          label="角色ID"
+          width="220"
+        >
+          <template slot-scope="scope">{{ scope.row.id }}</template>
+        </el-table-column>
+        <el-table-column
+          align="center"
+          label="角色名称"
+          width="220"
+        >
+          <template slot-scope="scope">{{ scope.row.name }}</template>
+        </el-table-column>
+        <el-table-column
+          align="header-center"
+          label="描述"
+        >
+          <template slot-scope="scope">{{ scope.row.desc }}</template>
+        </el-table-column>
+        <el-table-column
+          align="header-center"
+          label="创建时间"
+        >
+          <template slot-scope="scope">{{ scope.row.created_at | parseTime('{y}-{m}-{d} {h}:{i}') }}</template>
+        </el-table-column>
+        <el-table-column
+          align="center"
+          label="操作"
+        >
+          <template slot-scope="scope">
+            <el-button
+              type="primary"
+              size="small"
+              @click="handleEdit(scope)"
+            >编辑权限</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+
+      <el-dialog
+        :visible.sync="dialogVisible"
+        :title="dialogType==='edit'?'编辑角色':'添加角色'"
+      >
+        <el-form
+          :model="role"
+          label-width="80px"
+          label-position="left"
+        >
+          <el-form-item label="角色名称">
+            <el-input
+              v-model="role.name"
+              placeholder="角色名称"
+            />
+          </el-form-item>
+          <el-form-item label="描述">
+            <el-input
+              v-model="role.desc"
+              :autosize="{ minRows: 2, maxRows: 4}"
+              type="textarea"
+              placeholder="角色描述"
+            />
+          </el-form-item>
+          <el-form-item label="权限节点">
+            <el-tree
+              ref="tree"
+              :data="routeList"
+              show-checkbox
+              node-key="id"
+              :default-expand-all="true"
+              :default-checked-keys="defaultChecked"
+              :props="defaultProps"
+            />
+          </el-form-item>
+        </el-form>
+        <div style="text-align:right;">
+          <el-button
+            type="danger"
+            @click="dialogVisible=false"
+          >{{ $t('permission.cancel') }}</el-button>
+          <el-button
+            type="primary"
+            @click="confirmRole"
+          >{{ $t('permission.confirm') }}</el-button>
+        </div>
+      </el-dialog>
+    </el-card>
   </div>
 </template>
 
@@ -139,13 +189,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.app-container {
-  .roles-table {
-    margin-top: 30px;
-  }
-  .permission-tree {
-    margin-bottom: 30px;
-  }
+<style scoped>
+.main {
+  padding: 32px;
 }
 </style>
