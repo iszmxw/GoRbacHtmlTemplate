@@ -53,6 +53,11 @@ export const constantRoutes = [{
   hidden: true
 },
 {
+  path: '/logins',
+  component: () => import('@/views/login/login'),
+  hidden: true
+},
+{
   path: '/404',
   component: () => import('@/views/error-page/404'),
   hidden: true
@@ -106,7 +111,7 @@ export const asyncRoutes = [{
       roles: ['admin'] // 或者只能在子导航中设置角色
     }
   },
-  {// 登录日志
+  { // 登录日志
     path: 'loginLog',
     component: () => import('@/views/system/loginLog'),
     name: 'loginLog',
@@ -115,7 +120,7 @@ export const asyncRoutes = [{
       roles: ['admin'] // 或者只能在子导航中设置角色
     }
   },
-  {// 操作日志
+  { // 操作日志
     path: 'operationLog',
     component: () => import('@/views/system/operationLog'),
     name: 'operationLog',
