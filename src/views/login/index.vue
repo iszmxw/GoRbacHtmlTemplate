@@ -352,5 +352,5 @@ export default {
 }
 </script>
 
-<style src="../../assets/style/login.css" scoped>
+<style src="@/assets/style/login.css" scoped>
 </style>
