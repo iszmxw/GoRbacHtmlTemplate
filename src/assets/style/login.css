@@ -1,264 +1,3 @@
-<template>
-
-  <body class="session-body">
-    <div class="site-content">
-      <div class="session-wrapper">
-        <div class="ui container">
-          <div class="session__body">
-            <div class="session-sidebox">
-              <div class="session-sidebox__container">
-                <div class="session-sidebox__header">
-                  <div class="session-sidebox__logo">
-                    <img
-                      alt="logo"
-                      src="https://gitee.com/iszmxw/FigureBed/raw/master/images/gorbac/gopher1.png"
-                    >
-                    <img
-                      alt="logo"
-                      src="https://gitee.com/iszmxw/FigureBed/raw/master/images/gorbac/gopher.png"
-                    >
-                  </div>
-                  <h1 class="session-sidebox__title" />
-                  <h2 class="session-sidebox__subtitle">
-                    GoRbac 基础权限管理
-                  </h2>
-                </div>
-                <div class="session-sidebox__content">
-                  <div class="session-sidebox-content__container">
-                    <div class="session-sidebox-gitee__container">
-                      <div class="session-sidebox-gitee__item">
-                        <div class="session-sidebox-gitee__number"> 600 万+ </div>
-                        <div class="session-sidebox-gitee__title"> 开发者 </div>
-                      </div>
-                      <div class="session-sidebox-gitee__item">
-                        <div class="session-sidebox-gitee__number"> 1500 万+ </div>
-                        <div class="session-sidebox-gitee__title"> 代码仓库 </div>
-                      </div>
-                      <div class="session-sidebox-gitee__item">
-                        <div class="session-sidebox-gitee__number"> 18 万+ </div>
-                        <div class="session-sidebox-gitee__title"> 企业客户 </div>
-                      </div>
-                      <div class="session-sidebox-gitee__item">
-                        <div class="session-sidebox-gitee__number"> 2000+ </div>
-                        <div class="session-sidebox-gitee__title"> 高校 </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="session-sidebox__footer">
-                  <a
-                    href="https://gitee.com/iszmxw/GoRbacApiService"
-                    target="_blank"
-                  >
-                    <strong class="session-sidebox__icon-hot">GoRbac 管理后台</strong>
-                    <span class="session-sidebox__divider">-</span>
-                    基础权限管理
-                    <i class="iconfont icon-arrow-circle-right " />
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div class="session-form">
-              <div class="session-form__container is-login">
-                <header class="session-form__header">
-                  <h2 class="session-form__title">
-                    <span>登录</span>
-                  </h2>
-                  <span class="pull-right">
-                    没有帐号？
-                    <a href="javascript:void(0)">点此注册</a>
-                  </span>
-                </header>
-                <div class="session__flash-error">
-                  <div class="ui message error flash_error flash_error_box" />
-                </div>
-                <form
-                  id="new_user"
-                  action="javascript:void(0)"
-                  class="ui custom form session__control session-login__form session-login__with-password"
-                  method="post"
-                >
-                  <div class="session-login__body">
-                    <div class="session-form__fields">
-                      <div class="git-login-form-fields">
-                        <div
-                          id="git-login"
-                          class="field"
-                        >
-                          <input
-                            id="user_login"
-                            class="login-password__account-input"
-                            name="user[login]"
-                            placeholder="手机／邮箱／后台用户"
-                            type="text"
-                          >
-                        </div>
-                        <div class="field">
-                          <input
-                            id="user_password"
-                            placeholder="请输入密码"
-                            type="password"
-                          >
-                        </div>
-                        <div class="two fields">
-                          <div class="field">
-                            <div class="ui checkbox js-checkbox">
-                              <label>记住我</label>
-                            </div>
-                          </div>
-                          <div
-                            class="field"
-                            style="text-align: right"
-                          >
-                            <a
-                              class="session__toggle-button"
-                              data-control="phone"
-                              href=""
-                            >短信验证登录</a>
-                          </div>
-                        </div>
-                        <div class="field">
-                          <input
-                            class="ui fluid orange submit button large"
-                            name="commit"
-                            type="submit"
-                            value="登 录"
-                          >
-                        </div>
-                        <div class="field text-center">
-                          <a
-                            class="forget-password"
-                            href="javascript:void(0)"
-                          >已有帐号，忘记密码？</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-
-                <!-- 其他第三方登录 -->
-                <div class="session-login-oauth">
-
-                  <div class="session-login__oschina">
-                    <a href="javascript:void(0)">
-                      <!-- <i class="icon-logo-osc iconfont osc"></i> -->
-                      <span>
-                        使用 OSChina 帐号登录
-                      </span>
-                    </a>
-                    <div class="item">
-                      <a href="javascript:void(0)">
-                        <div class="git-other-login-icon">
-                          <i
-                            class="github icon-logo-github iconfont"
-                            title="使用 GitHub 帐号登录"
-                          />
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-
-                  <div class="session-login-oauth__container">
-                    <div class="field">
-                      <div class="ui horizontal divider session-login__oauth-title">
-                        <span class="text-muted">
-                          其他方式登录
-                        </span>
-                      </div>
-                    </div>
-                    <div class="ui horizontal list session-oauth__list">
-
-                      <div class="item">
-                        <a href="javascript:void(0)">
-                          <div class="git-other-login-icon">
-                            <i
-                              class="icon-logo-windows iconfont windows"
-                              title="使用 WindowsLive 帐号登录"
-                            />
-                          </div>
-                        </a>
-                      </div>
-
-                      <div class="item">
-                        <a href="javascript:void(0)">
-                          <div class="git-other-login-icon">
-                            <i
-                              class="icon-logo_wechat iconfont wechat"
-                              title="使用微信帐号登录"
-                            />
-                          </div>
-                        </a>
-                      </div>
-
-                      <div class="item">
-                        <a href="javascript:void(0)">
-                          <div class="git-other-login-icon">
-                            <i
-                              class="icon-logo-weibo iconfont weibo"
-                              title="使用 Weibo 帐号登录"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div class="item">
-                        <a href="javascript:void(0)">
-                          <div class="git-other-login-icon">
-                            <i
-                              class="icon-logo-qq iconfont qq"
-                              title="使用 QQ 帐号登录"
-                            />
-                          </div>
-                        </a>
-                      </div>
-
-                    </div>
-                  </div>
-
-                </div>
-                <!-- 其他第三方登录 -->
-
-              </div>
-
-            </div>
-          </div>
-          <!-- 底部信息 -->
-          <div class="session__footer">
-            <span class="session__footer-item">
-              <a
-                href="http://blog.54zm.com"
-                target="_blank"
-              >© 追梦小窝</a>
-            </span>
-            <span class="session__footer-item">
-              <a
-                href="https://gitee.com/iszmxw/GoRbacApiService"
-                target="_blank"
-              >GoRbacApiService</a>
-            </span>
-            <span class="session__footer-item">
-              <a
-                href="javascript:void(0)"
-                target="_blank"
-              >帮助文档</a>
-            </span>
-            <span class="session__footer-item">
-              <a
-                href="https://gitee.com/iszmxw/GoRbacHtmlTemplate"
-                target="_blank"
-              >GoRbacHtmlTemplate</a>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
-</template>
-
-<script>
-</script>
-
-<style scoped>
 @charset "UTF-8";
 html {
   -webkit-box-sizing: border-box;
@@ -356,14 +95,14 @@ html {
 .session-wrapper:before {
   width: 394px;
   height: 468px;
-  background-image: url("https://gitee.com/iszmxw/FigureBed/raw/master/images/gorbac/bg-left.png");
+  background-image: url("./img/bg-left.png");
   left: 0;
 }
 
 .session-wrapper:after {
   width: 487px;
   height: 412px;
-  background-image: url("https://gitee.com/iszmxw/FigureBed/raw/master/images/gorbac/bg-right.png");
+  background-image: url("./img/bg-right.png");
   right: 0;
 }
 
@@ -442,12 +181,12 @@ html {
 }
 
 .session-sidebox::before {
-  background: url(https://gitee.com/iszmxw/FigureBed/raw/master/images/gorbac/left-1.png)
+  background: url(./img/left-1.png)
     no-repeat 0 0;
 }
 
 .session-sidebox::after {
-  background: url(https://gitee.com/iszmxw/FigureBed/raw/master/images/gorbac/left-2.png)
+  background: url(./img/left-2.png)
     no-repeat right bottom;
 }
 
@@ -1563,4 +1302,3 @@ ol.ui.list li:last-child,
 .session__footer-item + .session__footer-item {
   margin-left: 8px;
 }
-</style>

@@ -1,82 +1,275 @@
 <template>
-  <div class="login-container">
-    <el-form
-      ref="loginForm"
-      :model="loginForm"
-      :rules="loginRules"
-      class="login-form"
-      auto-complete="on"
-      label-position="left"
-    >
-      <div class="title-container">
-        <img src="https://gitee.com/iszmxw/FigureBed/raw/master/images/gorbac/go-logo.png" alt="GoRbac" width="45" height="45">
-        <h3 class="title">GoRbac</h3>
-      </div>
 
-      <el-form-item prop="username">
-        <span class="svg-container">
-          <svg-icon icon-class="user" />
-        </span>
-        <el-input
-          ref="username"
-          v-model="loginForm.username"
-          :placeholder="$t('login.username')"
-          name="username"
-          type="text"
-          tabindex="1"
-          auto-complete="on"
-        />
-      </el-form-item>
+  <body class="session-body">
+    <div class="site-content">
+      <div class="session-wrapper">
+        <div class="ui container">
+          <div class="session__body">
+            <div class="session-sidebox">
+              <div class="session-sidebox__container">
+                <div class="session-sidebox__header">
+                  <div class="session-sidebox__logo">
+                    <img
+                      alt="logo"
+                      src="@/assets/style/img/gopher1.png"
+                    >
+                    <img
+                      alt="logo"
+                      src="@/assets/style/img/gopher.png"
+                    >
+                  </div>
+                  <h1 class="session-sidebox__title" />
+                  <h2 class="session-sidebox__subtitle">
+                    GoRbac 基础权限管理
+                  </h2>
+                </div>
+                <div class="session-sidebox__content">
+                  <div class="session-sidebox-content__container">
+                    <div class="session-sidebox-gitee__container">
+                      <div class="session-sidebox-gitee__item">
+                        <div class="session-sidebox-gitee__number"> 600 万+ </div>
+                        <div class="session-sidebox-gitee__title"> 开发者 </div>
+                      </div>
+                      <div class="session-sidebox-gitee__item">
+                        <div class="session-sidebox-gitee__number"> 1500 万+ </div>
+                        <div class="session-sidebox-gitee__title"> 代码仓库 </div>
+                      </div>
+                      <div class="session-sidebox-gitee__item">
+                        <div class="session-sidebox-gitee__number"> 18 万+ </div>
+                        <div class="session-sidebox-gitee__title"> 企业客户 </div>
+                      </div>
+                      <div class="session-sidebox-gitee__item">
+                        <div class="session-sidebox-gitee__number"> 2000+ </div>
+                        <div class="session-sidebox-gitee__title"> 高校 </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="session-sidebox__footer">
+                  <a
+                    href="https://gitee.com/iszmxw/GoRbacApiService"
+                    target="_blank"
+                  >
+                    <strong class="session-sidebox__icon-hot">GoRbac 管理后台</strong>
+                    <span class="session-sidebox__divider">-</span>
+                    基础权限管理
+                    <i class="iconfont icon-arrow-circle-right " />
+                  </a>
+                </div>
+              </div>
+            </div>
 
-      <el-tooltip v-model="capsTooltip" content="Caps lock is On" placement="right" manual>
-        <el-form-item prop="password">
-          <span class="svg-container">
-            <svg-icon icon-class="password" />
-          </span>
-          <el-input
-            :key="passwordType"
-            ref="password"
-            v-model="loginForm.password"
-            :type="passwordType"
-            :placeholder="$t('login.password')"
-            name="password"
-            tabindex="2"
-            auto-complete="on"
-            @keyup.native="checkCapslock"
-            @blur="capsTooltip = false"
-            @keyup.enter.native="handleLogin"
-          />
-          <span class="show-pwd" @click="showPwd">
-            <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
-          </span>
-        </el-form-item>
-      </el-tooltip>
+            <!-- 表单部分 -->
+            <div class="session-form">
+              <div class="session-form__container is-login">
+                <header class="session-form__header">
+                  <h2 class="session-form__title">
+                    <span>登录</span>
+                  </h2>
+                  <span class="pull-right">
+                    没有帐号？
+                    <a href="javascript:void(0)">点此注册</a>
+                  </span>
+                </header>
+                <div class="session__flash-error">
+                  <div class="ui message error flash_error flash_error_box" />
+                </div>
+                <el-form
+                  ref="loginForm"
+                  class="ui custom form session__control session-login__form session-login__with-password"
+                  :model="loginForm"
+                  :rules="loginRules"
+                  auto-complete="on"
+                  label-position="left"
+                >
+                  <div class="session-login__body">
+                    <div class="session-form__fields">
+                      <el-tooltip
+                        v-model="capsTooltip"
+                        content="Caps lock is On"
+                        placement="right"
+                        manual
+                      >
+                        <div class="git-login-form-fields">
+                          <div class="field">
+                            <el-form-item prop="username">
+                              <el-input
+                                ref="username"
+                                v-model="loginForm.username"
+                                class="login-password__account-input"
+                                :placeholder="$t('login.username')"
+                                name="username"
+                                type="text"
+                                tabindex="1"
+                                auto-complete="on"
+                                @blur="capsTooltip = false"
+                              />
+                            </el-form-item>
+                          </div>
+                          <div class="field">
+                            <el-form-item prop="password">
+                              <el-input
+                                ref="password"
+                                v-model="loginForm.password"
+                                type="password"
+                                :placeholder="$t('login.password')"
+                                name="password"
+                                tabindex="2"
+                                auto-complete="on"
+                                @blur="capsTooltip = false"
+                                @keyup.enter.native="handleLogin"
+                              />
+                            </el-form-item>
+                          </div>
 
-      <el-button
-        :loading="loading"
-        type="primary"
-        style="width:100%;margin-bottom:30px;"
-        @click.native.prevent="handleLogin"
-      >{{ $t('login.logIn') }}</el-button>
+                          <div class="field">
+                            <el-button
+                              class="ui fluid orange submit button large"
+                              :loading="loading"
+                              type="primary"
+                              style="width:100%;margin-bottom:30px;"
+                              @click.native.prevent="handleLogin"
+                            >{{ $t('login.logIn') }}</el-button>
+                          </div>
+                          <div class="field text-center">
+                            <a
+                              class="forget-password"
+                              href="javascript:void(0)"
+                            >已有帐号，忘记密码？</a>
+                          </div>
+                        </div>
+                      </el-tooltip>
+                    </div>
+                  </div>
+                </el-form>
 
-      <div style="position:relative">
-        <div class="tips">
-          <span>{{ $t('login.tips') }}</span>
+                <!-- 其他第三方登录 -->
+                <div class="session-login-oauth">
+
+                  <div class="session-login__oschina">
+                    <a href="javascript:void(0)">
+                      <!-- <i class="icon-logo-osc iconfont osc"></i> -->
+                      <span>
+                        使用 OSChina 帐号登录
+                      </span>
+                    </a>
+                    <div class="item">
+                      <a href="javascript:void(0)">
+                        <div class="git-other-login-icon">
+                          <i
+                            class="github icon-logo-github iconfont"
+                            title="使用 GitHub 帐号登录"
+                          />
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div class="session-login-oauth__container">
+                    <div class="field">
+                      <div class="ui horizontal divider session-login__oauth-title">
+                        <span class="text-muted">
+                          其他方式登录
+                        </span>
+                      </div>
+                    </div>
+                    <div class="ui horizontal list session-oauth__list">
+
+                      <div class="item">
+                        <a href="javascript:void(0)">
+                          <div class="git-other-login-icon">
+                            <i
+                              class="icon-logo-windows iconfont windows"
+                              title="使用 WindowsLive 帐号登录"
+                            />
+                          </div>
+                        </a>
+                      </div>
+
+                      <div class="item">
+                        <a href="javascript:void(0)">
+                          <div class="git-other-login-icon">
+                            <i
+                              class="icon-logo_wechat iconfont wechat"
+                              title="使用微信帐号登录"
+                            />
+                          </div>
+                        </a>
+                      </div>
+
+                      <div class="item">
+                        <a href="javascript:void(0)">
+                          <div class="git-other-login-icon">
+                            <i
+                              class="icon-logo-weibo iconfont weibo"
+                              title="使用 Weibo 帐号登录"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div class="item">
+                        <a href="javascript:void(0)">
+                          <div class="git-other-login-icon">
+                            <i
+                              class="icon-logo-qq iconfont qq"
+                              title="使用 QQ 帐号登录"
+                            />
+                          </div>
+                        </a>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+                <!-- 其他第三方登录 -->
+
+              </div>
+            </div>
+            <!-- 表单部分 -->
+
+          </div>
+          <!-- 底部信息 -->
+          <div class="session__footer">
+            <span class="session__footer-item">
+              <a
+                href="http://blog.54zm.com"
+                target="_blank"
+              >© 追梦小窝</a>
+            </span>
+            <span class="session__footer-item">
+              <a
+                href="https://gitee.com/iszmxw/GoRbacApiService"
+                target="_blank"
+              >GoRbacApiService</a>
+            </span>
+            <span class="session__footer-item">
+              <a
+                href="javascript:void(0)"
+                target="_blank"
+              >帮助文档</a>
+            </span>
+            <span class="session__footer-item">
+              <a
+                href="https://gitee.com/iszmxw/GoRbacHtmlTemplate"
+                target="_blank"
+              >GoRbacHtmlTemplate</a>
+            </span>
+          </div>
         </div>
       </div>
-    </el-form>
-  </div>
+    </div>
+  </body>
 </template>
 
 <script>
 import { validUsername } from '@/utils/validate'
 
 export default {
-  name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
-        callback(new Error('请输入正确的用户名'))
+        callback(new Error('登录账户不能为空'))
       } else {
         callback()
       }
@@ -137,16 +330,6 @@ export default {
         this.capsTooltip = false
       }
     },
-    showPwd() {
-      if (this.passwordType === 'password') {
-        this.passwordType = ''
-      } else {
-        this.passwordType = 'password'
-      }
-      this.$nextTick(() => {
-        this.$refs.password.focus()
-      })
-    },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
@@ -165,158 +348,9 @@ export default {
         }
       })
     }
-    // afterQRScan() {
-    //   if (e.key === 'x-admin-oauth-code') {
-    //     const code = getQueryObject(e.newValue)
-    //     const codeMap = {
-    //       wechat: 'code',
-    //       tencent: 'code'
-    //     }
-    //     const type = codeMap[this.auth_type]
-    //     const codeName = code[type]
-    //     if (codeName) {
-    //       this.$store.dispatch('LoginByThirdparty', codeName).then(() => {
-    //         this.$router.push({ path: this.redirect || '/' })
-    //       })
-    //     } else {
-    //       alert('第三方登录失败')
-    //     }
-    //   }
-    // }
   }
 }
 </script>
 
-<style lang="scss">
-/* 修复input 背景不协调 和光标变色 */
-/* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
-
-$bg: #283443;
-$light_gray: #fff;
-$cursor: #fff;
-
-@supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
-  .login-container .el-input input {
-    color: $cursor;
-  }
-}
-
-/* reset element-ui css */
-.login-container {
-  .el-input {
-    display: inline-block;
-    height: 47px;
-    width: 85%;
-
-    input {
-      background: transparent;
-      border: 0px;
-      -webkit-appearance: none;
-      border-radius: 0px;
-      padding: 12px 5px 12px 15px;
-      color: $light_gray;
-      height: 47px;
-      caret-color: $cursor;
-
-      &:-webkit-autofill {
-        box-shadow: 0 0 0px 1000px $bg inset !important;
-        -webkit-text-fill-color: $cursor !important;
-      }
-    }
-  }
-
-  .el-form-item {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    color: #454545;
-  }
-}
-</style>
-
-<style lang="scss" scoped>
-$bg: #2d3a4b;
-$dark_gray: #889aa4;
-$light_gray: #eee;
-
-.login-container {
-  min-height: 100%;
-  width: 100%;
-  background-color: $bg;
-  overflow: hidden;
-
-  .login-form {
-    position: relative;
-    width: 520px;
-    max-width: 100%;
-    padding: 160px 35px 0;
-    margin: 0 auto;
-    overflow: hidden;
-  }
-
-  .tips {
-    font-size: 14px;
-    color: #fff;
-    margin-bottom: 10px;
-    text-align: center;
-
-    span {
-      &:first-of-type {
-        margin-right: 16px;
-      }
-    }
-  }
-
-  .svg-container {
-    padding: 6px 5px 6px 15px;
-    color: $dark_gray;
-    vertical-align: middle;
-    width: 30px;
-    display: inline-block;
-  }
-
-  .title-container {
-    position: relative;
-    text-align: center;
-
-    .title {
-      font-size: 26px;
-      color: $light_gray;
-      margin: 0px auto 40px auto;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    .set-language {
-      color: #fff;
-      position: absolute;
-      top: 3px;
-      font-size: 18px;
-      right: 0px;
-      cursor: pointer;
-    }
-  }
-
-  .show-pwd {
-    position: absolute;
-    right: 10px;
-    top: 7px;
-    font-size: 16px;
-    color: $dark_gray;
-    cursor: pointer;
-    user-select: none;
-  }
-
-  .thirdparty-button {
-    position: absolute;
-    right: 0;
-    bottom: 6px;
-  }
-
-  @media only screen and (max-width: 470px) {
-    .thirdparty-button {
-      display: none;
-    }
-  }
-}
+<style src="../../assets/style/login.css" scoped>
 </style>
