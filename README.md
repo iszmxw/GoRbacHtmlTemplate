@@ -79,7 +79,7 @@
 
 ```bash
 # 克隆项目
-git clone https://github.com/iszmxw/BasicsApiTemplate.git
+git clone https://gitee.com/iszmxw/GoRbacHtmlTemplate.git
 # 进入项目目录
 cd BasicsApiTemplate
 # 安装依赖
@@ -122,6 +122,6 @@ npm run lint -- --fix
 
 ## License
 
-[MIT](https://github.com/iszmxw/BasicsApiTemplate/blob/master/LICENSE)
+[MIT](https://gitee.com/iszmxw/GoRbacHtmlTemplate/blob/master/LICENSE)
 
 Copyright (c) 2020-present Iszmxw
