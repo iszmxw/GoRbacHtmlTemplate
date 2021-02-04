@@ -54,8 +54,8 @@
       </el-table>
 
       <el-dialog
-        :visible.sync="dialogVisible"
-        :title="dialogType==='edit'?'编辑角色':'添加角色'"
+        :visible.sync="dialogVisibleEdit"
+        title="编辑角色"
       >
         <el-form
           :model="role"
@@ -91,7 +91,7 @@
         <div style="text-align:right;">
           <el-button
             type="danger"
-            @click="dialogVisible=false"
+            @click="dialogVisibleEdit=false"
           >{{ $t('permission.cancel') }}</el-button>
           <el-button
             type="primary"
@@ -113,9 +113,8 @@ export default {
       role: Object.assign({}),
       routes: [],
       rolesList: [],
-      dialogVisible: false,
-      dialogType: 'new',
-      checkStrictly: false,
+      dialogVisibleAdd: false,
+      dialogVisibleEdit: false,
       defaultProps: {
         children: 'children',
         label: 'name'
@@ -156,9 +155,7 @@ export default {
     },
     handleEdit(scope) {
       // 编辑框弹出
-      this.dialogType = 'edit'
-      this.dialogVisible = true
-      this.checkStrictly = true
+      this.dialogVisibleEdit = true
       this.role = deepClone(scope.row)
       this.routeListQuery.id = scope.row.id
       this.getRoleRoutes(this.routeListQuery)
@@ -170,7 +167,7 @@ export default {
       // 修改成功提示
       if (res.code === 20000) {
         const { desc, id, name } = this.role
-        this.dialogVisible = false
+        this.dialogVisibleEdit = false
         this.$notify({
           title: 'Success',
           dangerouslyUseHTMLString: true,
