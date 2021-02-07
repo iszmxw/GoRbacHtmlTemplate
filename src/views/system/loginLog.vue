@@ -1,5 +1,6 @@
+
 <template>
-  <div class="main">
+  <BasicLayout>
     <el-card class="box-card">
       <div
         slot="header"
@@ -27,15 +28,27 @@
             <span>{{ scope.row.id }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="用户名" align="center">
+        <el-table-column
+          label="用户名"
+          align="center"
+        >
           <template slot-scope="scope">
             <span>{{ scope.row.username }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="角色" align="center">
+        <el-table-column
+          label="角色"
+          align="center"
+        >
           <template slot-scope="scope">
-            <el-tag v-if="scope.row.account_id === 1" type="info">{{ scope.row.role_name }}</el-tag>
-            <el-tag v-else type="success">{{ scope.row.role_name }}</el-tag>
+            <el-tag
+              v-if="scope.row.account_id === 1"
+              type="info"
+            >{{ scope.row.role_name }}</el-tag>
+            <el-tag
+              v-else
+              type="success"
+            >{{ scope.row.role_name }}</el-tag>
           </template>
         </el-table-column>
         <el-table-column label="登录IP">
@@ -43,12 +56,18 @@
             <span class="link-type">{{ scope.row.ip }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="登录地址" align="center">
+        <el-table-column
+          label="登录地址"
+          align="center"
+        >
           <template slot-scope="{row}">
             <el-tag>{{ row.address }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="时间" align="center">
+        <el-table-column
+          label="时间"
+          align="center"
+        >
           <template slot-scope="scope">
             <span>{{ scope.row.created_at | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
           </template>
@@ -63,7 +82,7 @@
         @pagination="getList"
       />
     </el-card>
-  </div>
+  </BasicLayout>
 </template>
 
 <script>
@@ -106,7 +125,4 @@ export default {
 </script>
 
 <style scoped>
-.main {
-  padding: 32px;
-}
 </style>

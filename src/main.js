@@ -24,6 +24,10 @@ Vue.use(Viser)
 
 import * as filters from './filters' // global filters
 
+// 全局组件挂载
+import BasicLayout from '@/layout/BasicLayout'
+Vue.component('BasicLayout', BasicLayout)
+
 /**
  * If you don't want to use mock-server
  * you want to use mockjs for request interception

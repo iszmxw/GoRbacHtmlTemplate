@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <BasicLayout>
     <el-card class="box-card">
       <div
         slot="header"
@@ -100,7 +100,7 @@
         </div>
       </el-dialog>
     </el-card>
-  </div>
+  </BasicLayout>
 </template>
 
 <script>
@@ -185,9 +185,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.main {
-  padding: 32px;
-}
-</style>
