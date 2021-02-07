@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import { get_device, get_template, edit_price } from '@/api/device'
+import { get_device, get_template, edit_price } from '@/api/old/device'
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 

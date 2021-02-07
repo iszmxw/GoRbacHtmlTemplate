@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { operationLog } from '@/api/dashboard'
+import { operationLog } from '@/api/gorbac/system/logs'
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 

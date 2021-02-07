@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import { get_scene, get_store_info, save_store_info } from '@/api/store'
+import { get_scene, get_store_info, save_store_info } from '@/api/old/store'
 
 export default {
   data() {

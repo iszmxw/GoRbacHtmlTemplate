@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { add } from '@/api/merchant'
+import { add } from '@/api/old/merchant'
 
 export default {
   data() {

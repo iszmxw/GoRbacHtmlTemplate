@@ -105,7 +105,7 @@
 
 <script>
 import { deepClone } from '@/utils'
-import { getRoleRoutes, getRoles, updateRole } from '@/api/role'
+import { getRoleRoutes, getRoles, updateRole } from '@/api/gorbac/permission/role'
 
 export default {
   data() {

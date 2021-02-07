@@ -97,7 +97,7 @@
 </template>
 
 <script>
-import { getList, edit, lockStatus } from '@/api/merchant'
+import { getList, edit, lockStatus } from '@/api/old/merchant'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
 export default {

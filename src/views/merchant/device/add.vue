@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { config, save_config } from '@/api/device'
+import { config, save_config } from '@/api/old/device'
 
 export default {
   data() {

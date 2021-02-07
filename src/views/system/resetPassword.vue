@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { reset_password } from '@/api/dashboard'
+import { reset_password } from '@/api/gorbac/system/dashboard'
 import { setTimeout } from 'timers'
 
 export default {

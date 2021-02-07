@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { fetchList } from '@/api/dashboard'
+import { loginLog } from '@/api/gorbac/system/logs'
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
@@ -91,7 +91,7 @@ export default {
   methods: {
     getList() {
       this.listLoading = true
-      fetchList(this.listQuery).then(response => {
+      loginLog(this.listQuery).then(response => {
         this.list = response.data.data
         this.total = response.data.total
 

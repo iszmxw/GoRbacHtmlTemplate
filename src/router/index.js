@@ -125,11 +125,20 @@ export const asyncRoutes = [{
     }
   },
   {
-    path: 'role',
-    component: () => import('@/views/system/role'),
-    name: 'role',
+    path: 'permission',
+    component: () => import('@/views/system/permission'),
+    name: 'permission',
     meta: {
-      title: 'role',
+      title: 'permission',
+      roles: ['admin'] // 或者只能在子导航中设置角色
+    }
+  },
+  {
+    path: 'menus',
+    component: () => import('@/views/system/menus'),
+    name: 'menus',
+    meta: {
+      title: 'menus',
       roles: ['admin'] // 或者只能在子导航中设置角色
     }
   }

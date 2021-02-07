@@ -150,7 +150,7 @@ import {
   getList,
   edit,
   lockStatus
-} from '@/api/merchant'
+} from '@/api/old/merchant'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 export default {
   components: {
