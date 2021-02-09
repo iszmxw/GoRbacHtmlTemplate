@@ -37,10 +37,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iszmxw/gorbac-admin.git"
+    "url": "git+https://github.com/iszmxw/GoRbacHtmlTemplate.git"
   },
   "bugs": {
-    "url": "https://github.com/iszmxw/gorbac-admin/issues"
+    "url": "https://github.com/iszmxw/GoRbacHtmlTemplate/issues"
   },
   "dependencies": {
     "axios": "0.18.1",
@@ -49,7 +49,7 @@
     "driver.js": "0.9.5",
     "dropzone": "5.5.1",
     "echarts": "4.2.1",
-    "element-ui": "2.7.0",
+    "element-ui": "^2.15.0",
     "file-saver": "2.0.1",
     "fuse.js": "3.4.4",
     "js-cookie": "2.2.0",
