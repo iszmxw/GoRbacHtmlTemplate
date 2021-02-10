@@ -18,7 +18,7 @@ export function getMenu(data) {
 
 export function delMenu(data) {
   return request({
-    url: '/menus/list',
+    url: '/menus/delete',
     method: 'post',
     data
   })
@@ -26,7 +26,7 @@ export function delMenu(data) {
 
 export function addMenu(data) {
   return request({
-    url: '/menus/list',
+    url: '/menus/add',
     method: 'post',
     data
   })
