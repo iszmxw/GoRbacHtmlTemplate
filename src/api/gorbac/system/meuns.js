@@ -1,29 +1,6 @@
 import request from '@/utils/request'
 
-export function listMenu(data) {
-  return request({
-    url: '/menus/list',
-    method: 'post',
-    data
-  })
-}
-
-export function getMenu(data) {
-  return request({
-    url: '/menus/list',
-    method: 'post',
-    data
-  })
-}
-
-export function delMenu(data) {
-  return request({
-    url: '/menus/delete',
-    method: 'post',
-    data
-  })
-}
-
+// 添加
 export function addMenu(data) {
   return request({
     url: '/menus/add',
@@ -32,7 +9,35 @@ export function addMenu(data) {
   })
 }
 
+// 删除
+export function delMenu(data) {
+  return request({
+    url: '/menus/delete',
+    method: 'post',
+    data
+  })
+}
+
+// 获取单条数据
+export function getMenu(data) {
+  return request({
+    url: '/menus/detail',
+    method: 'post',
+    data
+  })
+}
+
+// 更新数据
 export function updateMenu(data) {
+  return request({
+    url: '/menus/edit',
+    method: 'post',
+    data
+  })
+}
+
+// 获取数据列表
+export function listMenu(data) {
   return request({
     url: '/menus/list',
     method: 'post',

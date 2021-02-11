@@ -123,7 +123,8 @@
             <el-button
               type="success"
               size="mini"
-            >编辑{{ scope.row.id }}</el-button>
+              @click="getDetail(scope.row)"
+            >编辑</el-button>
             <el-button
               type="danger"
               size="mini"
@@ -220,8 +221,8 @@
                 :label-width="formLabelWidth"
               >
                 <el-radio-group v-model="form.status">
-                  <el-radio label="1">已启用</el-radio>
-                  <el-radio label="2">未启用</el-radio>
+                  <el-radio :label="1">已启用</el-radio>
+                  <el-radio :label="2">未启用</el-radio>
                 </el-radio-group>
               </el-form-item>
             </el-col>
@@ -297,12 +298,170 @@
           >确 定</el-button>
         </div>
       </el-dialog>
+
+      <!-- 编辑路由表单 -->
+      <el-dialog
+        title="编辑菜单"
+        :visible.sync="dialogFormVisibleEdit"
+        :close-on-click-modal="false"
+        :close-on-press-escape="false"
+        width="35%"
+      >
+        <el-form :model="form">
+          <!-- 上级菜单 -->
+          <el-row>
+            <el-col :span="24">
+              <el-form-item
+                label="上级菜单"
+                prop="parent_id"
+                :label-width="formLabelWidth"
+              >
+                <treeselect
+                  v-model="form.parent_id"
+                  :options="menuOptions"
+                  :normalizer="normalizer"
+                  :show-count="true"
+                  placeholder="选择上级菜单"
+                />
+              </el-form-item>
+            </el-col>
+          </el-row>
+
+          <!-- 菜单标题，菜单排序 -->
+          <el-row :gutter="60">
+            <el-col :span="12">
+              <el-form-item
+                label="菜单名称"
+                prop="name"
+                :label-width="formLabelWidth"
+              >
+                <el-input
+                  v-model="form.name"
+                  placeholder="请输入菜单名称"
+                  autocomplete="off"
+                />
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item
+                label="菜单类型"
+                prop="type"
+                :label-width="formLabelWidth"
+              >
+                <el-radio-group v-model="form.type">
+                  <el-radio label="page">页&nbsp;&nbsp;&nbsp;&nbsp;面</el-radio>
+                  <el-radio label="api">接&nbsp;&nbsp;&nbsp;&nbsp;口</el-radio>
+                </el-radio-group>
+              </el-form-item>
+            </el-col>
+          </el-row>
+
+          <!-- 菜单类型 -->
+          <el-row :gutter="60">
+            <el-col :span="12">
+              <el-form-item
+                label="显示排序"
+                prop="sort"
+                :label-width="formLabelWidth"
+              >
+                <el-input-number
+                  v-model="form.sort"
+                  controls-position="right"
+                  :min="0"
+                />
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item
+                label="菜单状态"
+                prop="status"
+                :label-width="formLabelWidth"
+              >
+                <el-radio-group v-model="form.status">
+                  <el-radio :label="1">已启用</el-radio>
+                  <el-radio :label="2">未启用</el-radio>
+                </el-radio-group>
+              </el-form-item>
+            </el-col>
+          </el-row>
+
+          <!-- 菜单图标 -->
+          <el-row>
+            <el-col :span="24">
+              <el-form-item
+                label="菜单图标"
+                prop="icon"
+                :label-width="formLabelWidth"
+              >
+                <el-popover
+                  placement="bottom-start"
+                  width="460"
+                  trigger="click"
+                  @show="$refs['iconSelect'].reset()"
+                >
+                  <IconSelect
+                    ref="iconSelect"
+                    @selected="selectIcon"
+                  />
+                  <el-input
+                    slot="reference"
+                    v-model="form.icon"
+                    placeholder="点击选择图标"
+                    readonly
+                  >
+                    <svg-icon
+                      v-if="form.icon"
+                      slot="prefix"
+                      :icon-class="form.icon"
+                      class="el-input__icon"
+                      style="height: 36px;width: 16px;"
+                    />
+                    <i
+                      v-else
+                      slot="prefix"
+                      class="el-icon-search el-input__icon"
+                    />
+                  </el-input>
+                </el-popover>
+              </el-form-item>
+            </el-col>
+          </el-row>
+
+          <!-- 路由地址 -->
+          <el-row>
+            <el-col :span="24">
+              <el-form-item
+                label="路由地址"
+                prop="route"
+                :label-width="formLabelWidth"
+              >
+                <el-input
+                  v-model="form.route"
+                  placeholder="请输入路由地址"
+                />
+              </el-form-item>
+            </el-col>
+          </el-row>
+
+        </el-form>
+        <div
+          slot="footer"
+          class="dialog-footer"
+        >
+          <el-button @click="dialogFormVisibleEdit = false">取 消</el-button>
+          <el-button
+            type="primary"
+            @click="editData"
+          >确 定</el-button>
+        </div>
+      </el-dialog>
+
     </el-card>
   </BasicLayout>
 </template>
 
 <script>
-import { listMenu, addMenu, delMenu, updateMenu } from '@/api/gorbac/system/meuns'
+import { addMenu, delMenu, getMenu, updateMenu, listMenu } from '@/api/gorbac/system/meuns'
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import IconSelect from '@/components/IconSelect'
@@ -327,13 +486,15 @@ export default {
       },
       // 添加路由表单
       dialogFormVisibleAdd: false,
-      // 添加表单
+      // 编辑路由表单
+      dialogFormVisibleEdit: false,
+      // 公用表单
       form: {
         parent_id: 0,
         name: null,
         type: 'page',
         sort: 0,
-        status: '1',
+        status: 1,
         icon: null,
         route: null
       },
@@ -403,7 +564,6 @@ export default {
         type: 'warning'
       }).then(function() {
         delMenu({ id: row.id }).then(response => {
-          console.log(response)
           if (response.code === 20000) {
             that.$message.success(response.msg)
             that.getList()
@@ -411,10 +571,32 @@ export default {
         })
       }).catch(function() { })
     },
+    // 获取路由详情
+    getDetail(row) {
+      getMenu({ id: row.id }).then(response => {
+        if (response.code === 20000) {
+          const res = response.data
+          this.form.id = res.id
+          this.form.parent_id = res.parent_id
+          this.form.name = res.name
+          this.form.type = res.type
+          this.form.sort = res.sort
+          this.form.status = res.status
+          this.form.icon = res.icon
+          this.form.route = res.route
+          this.dialogFormVisibleEdit = true
+        }
+      })
+    },
     // 修改数据
-    aeditData() {
+    editData() {
+      const that = this
       updateMenu(this.form).then(response => {
-        console.log(response)
+        if (response.code === 20000) {
+          this.dialogFormVisibleEdit = false
+          that.$message.success(response.msg)
+          that.getList()
+        }
       })
     }
   }
