@@ -40,8 +40,8 @@ module.exports = {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }
       }
-    },
-    after: require('./mock/mock-server.js')
+    }
+    // after: require('./mock/mock-server.js') // 关闭 mock 本地数据接口
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that

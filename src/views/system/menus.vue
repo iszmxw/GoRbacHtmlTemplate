@@ -37,7 +37,34 @@
           align="left"
         >
           <template slot-scope="scope">
-            <svg-icon :icon-class="scope.row.icon" />
+            <span v-if="scope.row.icon">
+              <svg-icon :icon-class="scope.row.icon" />
+            </span>
+            <span v-else>
+              <el-tag
+                v-if="scope.row.type === 'api'"
+                type="danger"
+              >{{ scope.row.type }}</el-tag>
+              <el-tag
+                v-else-if="scope.row.type === 'page'"
+                type="success"
+              >{{ scope.row.type }}</el-tag>
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="类型"
+          align="left"
+        >
+          <template slot-scope="scope">
+            <el-tag
+              v-if="scope.row.type === 'api'"
+              type="danger"
+            >{{ scope.row.type }}</el-tag>
+            <el-tag
+              v-else
+              type="success"
+            >{{ scope.row.type }}</el-tag>
           </template>
         </el-table-column>
         <el-table-column
@@ -320,7 +347,7 @@ export default {
     // 菜单名称样式处理
     cellStyle({ row, column, rowIndex, columnIndex }) {
       if (row.children === null && columnIndex === 0) {
-        return 'xw-cell'
+        // return 'xw-cell'
       }
     },
     // 转换菜单数据结构
