@@ -461,7 +461,7 @@
 </template>
 
 <script>
-import { addMenu, delMenu, getMenu, updateMenu, listMenu } from '@/api/gorbac/system/meuns'
+import { addMenu, delMenu, getMenu, updateMenu, listMenu } from '@/api/gorbac/system/menus'
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import IconSelect from '@/components/IconSelect'

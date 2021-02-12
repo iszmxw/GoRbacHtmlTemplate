@@ -1,4 +1,42 @@
-import { asyncRoutes, constantRoutes } from '@/router'
+import Vue from 'vue'
+import {
+  asyncRoutes,
+  constantRoutes
+} from '@/router'
+import { getMenuRoutes } from '@/api/gorbac/system/menus'
+import Layout from '@/layout'
+
+/**
+ * 后台查询的菜单数据拼装成路由格式的数据
+ * @param routes
+ */
+export function formatMenu(routes, data) {
+  data.forEach(item => {
+    const menu = {
+      path: item.route,
+      component: item.component === 'Layout' ? Layout : loadView(item.component),
+      // redirect: item.route,
+      // alwaysShow: true, // 将始终显示根菜单
+      name: item.name,
+      meta: {
+        title: item.name,
+        icon: item.icon,
+        roles: ['admin'], // 可以在根导航中设置角色
+        noCache: true
+      },
+      children: [],
+      hidden: item.status === 0
+    }
+    if (item.children) {
+      formatMenu(menu.children, item.children)
+    }
+    routes.push(menu)
+  })
+}
+
+export const loadView = (view) => { // 路由懒加载
+  return (resolve) => require(['@/views' + view], resolve)
+}
 
 /**
  * Use meta.role to determine if the current user has permission
@@ -22,7 +60,9 @@ export function filterAsyncRoutes(routes, roles) {
   const res = []
 
   routes.forEach(route => {
-    const tmp = { ...route }
+    const tmp = {
+      ...route
+    }
     if (hasPermission(roles, tmp)) {
       if (tmp.children) {
         tmp.children = filterAsyncRoutes(tmp.children, roles)
@@ -48,15 +88,29 @@ const mutations = {
 
 const actions = {
   generateRoutes({ commit }, roles) {
+    console.log(roles)
     return new Promise(resolve => {
-      let accessedRoutes
-      if (roles.includes('admin')) {
-        accessedRoutes = asyncRoutes || []
-      } else {
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-      }
-      commit('SET_ROUTES', accessedRoutes)
-      resolve(accessedRoutes)
+      const loadMenuData = []
+      getMenuRoutes().then(response => {
+        // console.log(JSON.stringify(response))
+        if (response.code !== 20000) {
+          Vue.prototype.$message({
+            message: '菜单数据加载异常',
+            type: 'error'
+          })
+          // 异常注销登录
+          this.dispatch('user/logout')
+        } else {
+          Object.assign(loadMenuData, response.data)
+          // 格式化路由菜单数据
+          formatMenu(asyncRoutes, loadMenuData)
+          asyncRoutes.push({ path: '*', redirect: '/', hidden: true })
+          commit('SET_ROUTES', asyncRoutes)
+          resolve(asyncRoutes)
+        }
+      }).catch(error => {
+        console.log(error)
+      })
     })
   }
 }

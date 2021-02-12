@@ -74,8 +74,7 @@ export const constantRoutes = [{
       title: 'dashboard',
       icon: 'dashboard',
       noCache: true,
-      affix: true,
-      roles: ['admin'] // 可以在根导航中设置角色
+      affix: true
     }
   }]
 }
@@ -85,137 +84,138 @@ export const constantRoutes = [{
  * asyncRoutes
  * 需要根据用户角色动态加载的路由
  */
-export const asyncRoutes = [{
-  path: '/system',
-  component: Layout,
-  redirect: '/system/page',
-  alwaysShow: true, // 将始终显示根菜单
-  name: 'System',
-  meta: {
-    title: 'system',
-    icon: 'component',
-    roles: ['admin'] // 可以在根导航中设置角色
-  },
-  children: [{ // 重置密码
-    path: 'resetPassword',
-    component: () => import('@/views/system/resetPassword'),
-    name: 'resetPassword',
-    hidden: true,
-    meta: {
-      title: 'resetPassword',
-      roles: ['admin'] // 或者只能在子导航中设置角色
-    }
-  },
-  { // 登录日志
-    path: 'loginLog',
-    component: () => import('@/views/system/loginLog'),
-    name: 'loginLog',
-    meta: {
-      title: 'loginLog',
-      roles: ['admin'] // 或者只能在子导航中设置角色
-    }
-  },
-  { // 操作日志
-    path: 'operationLog',
-    component: () => import('@/views/system/operationLog'),
-    name: 'operationLog',
-    meta: {
-      title: 'operationLog',
-      roles: ['admin'] // 或者只能在子导航中设置角色
-    }
-  },
-  {
-    path: 'permission',
-    component: () => import('@/views/system/permission'),
-    name: 'permission',
-    meta: {
-      title: 'permission',
-      roles: ['admin'] // 或者只能在子导航中设置角色
-    }
-  },
-  {
-    path: 'menus',
-    component: () => import('@/views/system/menus'),
-    name: 'menus',
-    meta: {
-      title: 'menus',
-      roles: ['admin'] // 或者只能在子导航中设置角色
-    }
-  }
-  ]
-},
-{
-  path: '/merchant',
-  component: Layout,
-  redirect: '/merchant/page',
-  alwaysShow: true, // 将始终显示根菜单
-  name: 'merchant',
-  meta: {
-    title: 'merchant',
-    icon: 'user'
-  },
-  children: [{
-    path: 'merchant_add',
-    component: () => import('@/views/merchant/merchant_add'),
-    name: 'madd',
-    meta: {
-      title: 'madd',
-      roles: ['admin'] // 或者只能在子导航中设置角色
-    }
-  },
-  {
-    path: 'merchant_list',
-    component: () => import('@/views/merchant/merchant_list'),
-    name: 'mlist',
-    meta: {
-      title: 'mlist',
-      roles: ['admin'] // 或者只能在子导航中设置角色
-    }
-  },
-  {
-    path: 'store/store_list',
-    component: () => import('@/views/merchant/store/store_list'),
-    name: '门店列表',
-    meta: {
-      title: '门店列表',
-      roles: ['admin'] // 或者只能在子导航中设置角色
-    }
-  },
-  {
-    path: 'store/store_site',
-    component: () => import('@/views/merchant/store/store_site'),
-    name: '门店设置',
-    hidden: true,
-    meta: {
-      title: '门店设置',
-      roles: ['admin'] // 或者只能在子导航中设置角色
-    }
-  },
-  {
-    path: 'device/list',
-    component: () => import('@/views/merchant/device/list'),
-    name: '设备列表',
-    meta: {
-      title: '设备列表'
-    }
-  },
-  {
-    path: 'device/add',
-    component: () => import('@/views/merchant/device/add'),
-    name: '添加设备',
-    hidden: true,
-    meta: {
-      title: '添加设备'
-    }
-  }
-  ]
-},
-/** 当路由图太长时，可以将其拆分为小模块。 **/
-{
-  path: '*',
-  redirect: '/404',
-  hidden: true
-}
+export const asyncRoutes = [
+//   {
+//   path: '/system',
+//   component: Layout,
+//   redirect: '/system/page',
+//   alwaysShow: true, // 将始终显示根菜单
+//   name: 'System',
+//   meta: {
+//     title: 'system',
+//     icon: 'component',
+//     roles: ['admin'] // 可以在根导航中设置角色
+//   },
+//   children: [{ // 重置密码
+//     path: 'resetPassword',
+//     component: () => import('@/views/system/resetPassword'),
+//     name: 'resetPassword',
+//     hidden: true,
+//     meta: {
+//       title: 'resetPassword',
+//       roles: ['admin'] // 或者只能在子导航中设置角色
+//     }
+//   },
+//   { // 登录日志
+//     path: 'loginLog',
+//     component: () => import('@/views/system/loginLog'),
+//     name: 'loginLog',
+//     meta: {
+//       title: 'loginLog',
+//       roles: ['admin'] // 或者只能在子导航中设置角色
+//     }
+//   },
+//   { // 操作日志
+//     path: 'operationLog',
+//     component: () => import('@/views/system/operationLog'),
+//     name: 'operationLog',
+//     meta: {
+//       title: 'operationLog',
+//       roles: ['admin'] // 或者只能在子导航中设置角色
+//     }
+//   },
+//   { // 角色权限
+//     path: 'permission',
+//     component: () => import('@/views/system/permission'),
+//     name: 'permission',
+//     meta: {
+//       title: 'permission',
+//       roles: ['admin'] // 或者只能在子导航中设置角色
+//     }
+//   },
+//   { // 菜单配置
+//     path: 'menus',
+//     component: () => import('@/views/system/menus'),
+//     name: 'menus',
+//     meta: {
+//       title: 'menus',
+//       roles: ['admin'] // 或者只能在子导航中设置角色
+//     }
+//   }
+//   ]
+// },
+// {
+//   path: '/merchant',
+//   component: Layout,
+//   redirect: '/merchant/page',
+//   alwaysShow: true, // 将始终显示根菜单
+//   name: 'merchant',
+//   meta: {
+//     title: 'merchant',
+//     icon: 'user'
+//   },
+//   children: [{
+//     path: 'merchant_add',
+//     component: () => import('@/views/merchant/merchant_add'),
+//     name: 'madd',
+//     meta: {
+//       title: 'madd',
+//       roles: ['admin'] // 或者只能在子导航中设置角色
+//     }
+//   },
+//   {
+//     path: 'merchant_list',
+//     component: () => import('@/views/merchant/merchant_list'),
+//     name: 'mlist',
+//     meta: {
+//       title: 'mlist',
+//       roles: ['admin'] // 或者只能在子导航中设置角色
+//     }
+//   },
+//   {
+//     path: 'store/store_list',
+//     component: () => import('@/views/merchant/store/store_list'),
+//     name: '门店列表',
+//     meta: {
+//       title: '门店列表',
+//       roles: ['admin'] // 或者只能在子导航中设置角色
+//     }
+//   },
+//   {
+//     path: 'store/store_site',
+//     component: () => import('@/views/merchant/store/store_site'),
+//     name: '门店设置',
+//     hidden: true,
+//     meta: {
+//       title: '门店设置',
+//       roles: ['admin'] // 或者只能在子导航中设置角色
+//     }
+//   },
+//   {
+//     path: 'device/list',
+//     component: () => import('@/views/merchant/device/list'),
+//     name: '设备列表',
+//     meta: {
+//       title: '设备列表'
+//     }
+//   },
+//   {
+//     path: 'device/add',
+//     component: () => import('@/views/merchant/device/add'),
+//     name: '添加设备',
+//     hidden: true,
+//     meta: {
+//       title: '添加设备'
+//     }
+//   }
+//   ]
+// },
+// /** 当路由图太长时，可以将其拆分为小模块。 **/
+// {
+//   path: '*',
+//   redirect: '/404',
+//   hidden: true
+// }
 ]
 
 const createRouter = () => new Router({

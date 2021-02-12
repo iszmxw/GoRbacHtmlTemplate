@@ -44,3 +44,12 @@ export function listMenu(data) {
     data
   })
 }
+
+// 获取菜单路由
+export function getMenuRoutes(data) {
+  return request({
+    url: '/menus/async_routes',
+    method: 'post',
+    data
+  })
+}
