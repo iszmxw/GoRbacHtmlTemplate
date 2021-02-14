@@ -63,20 +63,10 @@ export const constantRoutes = [{
   hidden: true
 },
 {
-  path: '',
-  component: Layout,
+  // 重新定义首页跳转位置
+  path: '/',
   redirect: 'dashboard',
-  children: [{
-    path: 'dashboard',
-    component: () => import('@/views/dashboard/index'),
-    name: 'Dashboard',
-    meta: {
-      title: 'dashboard',
-      icon: 'dashboard',
-      noCache: true,
-      affix: true
-    }
-  }]
+  hidden: true
 }
 ]
 

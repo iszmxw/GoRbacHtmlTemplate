@@ -222,7 +222,7 @@
               >
                 <el-radio-group v-model="form.status">
                   <el-radio :label="1">已启用</el-radio>
-                  <el-radio :label="2">未启用</el-radio>
+                  <el-radio :label="0">未启用</el-radio>
                 </el-radio-group>
               </el-form-item>
             </el-col>
@@ -270,6 +270,21 @@
             </el-col>
           </el-row>
 
+          <!-- 文件路径 -->
+          <el-row v-if="form.type === 'page'">
+            <el-col :span="24">
+              <el-form-item
+                label="文件路径"
+                prop="route"
+                :label-width="formLabelWidth"
+              >
+                <el-input
+                  v-model="form.component"
+                  placeholder="请输入前端页面文件路径"
+                />
+              </el-form-item>
+            </el-col>
+          </el-row>
           <!-- 路由地址 -->
           <el-row>
             <el-col :span="24">
@@ -379,7 +394,7 @@
               >
                 <el-radio-group v-model="form.status">
                   <el-radio :label="1">已启用</el-radio>
-                  <el-radio :label="2">未启用</el-radio>
+                  <el-radio :label="0">未启用</el-radio>
                 </el-radio-group>
               </el-form-item>
             </el-col>
@@ -423,6 +438,22 @@
                     />
                   </el-input>
                 </el-popover>
+              </el-form-item>
+            </el-col>
+          </el-row>
+
+          <!-- 文件路径 -->
+          <el-row v-if="form.type === 'page'">
+            <el-col :span="24">
+              <el-form-item
+                label="文件路径"
+                prop="route"
+                :label-width="formLabelWidth"
+              >
+                <el-input
+                  v-model="form.component"
+                  placeholder="请输入前端页面文件路径"
+                />
               </el-form-item>
             </el-col>
           </el-row>

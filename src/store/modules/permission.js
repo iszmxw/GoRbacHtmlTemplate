@@ -1,8 +1,5 @@
 import Vue from 'vue'
-import {
-  asyncRoutes,
-  constantRoutes
-} from '@/router'
+import { constantRoutes } from '@/router'
 import { getMenuRoutes } from '@/api/gorbac/system/menus'
 import Layout from '@/layout'
 
@@ -12,25 +9,45 @@ import Layout from '@/layout'
  */
 export function formatMenu(routes, data) {
   data.forEach(item => {
-    const menu = {
-      path: item.route,
-      component: item.component === 'Layout' ? Layout : loadView(item.component),
-      // redirect: item.route,
-      // alwaysShow: true, // 将始终显示根菜单
-      name: item.name,
-      meta: {
-        title: item.name,
-        icon: item.icon,
-        roles: ['admin'], // 可以在根导航中设置角色
-        noCache: true
-      },
-      children: [],
-      hidden: item.status === 0
+    let menus
+    // 顶级菜单无下级处理
+    if (item.parent_id === 0 && item.children === null) {
+      menus = {
+        path: item.route,
+        component: Layout,
+        hidden: item.status === 0,
+        children: [{
+          path: item.route,
+          component: loadView(item.component),
+          name: item.name,
+          meta: {
+            title: item.name,
+            icon: item.icon,
+            noCache: true,
+            affix: true
+          }
+        }]
+      }
+    } else {
+      // 处理不是跟菜单
+      menus = {
+        path: item.route,
+        component: item.component === 'Layout' ? Layout : loadView(item.component),
+        hidden: item.status === 0,
+        name: item.name,
+        meta: {
+          title: item.name,
+          icon: item.icon,
+          roles: ['admin'], // 可以在根导航中设置角色
+          noCache: true
+        },
+        children: []
+      }
+      if (item.children) {
+        formatMenu(menus.children, item.children)
+      }
     }
-    if (item.children) {
-      formatMenu(menu.children, item.children)
-    }
-    routes.push(menu)
+    routes.push(menus)
   })
 }
 
@@ -91,6 +108,7 @@ const actions = {
     console.log(roles)
     return new Promise(resolve => {
       const loadMenuData = []
+      const asyncRoutes = []
       getMenuRoutes().then(response => {
         // console.log(JSON.stringify(response))
         if (response.code !== 20000) {
@@ -100,7 +118,10 @@ const actions = {
           })
           // 异常注销登录
           this.dispatch('user/logout')
-        } else {
+        }
+
+        // 菜单数据获取成功
+        if (response.code === 20000) {
           Object.assign(loadMenuData, response.data)
           // 格式化路由菜单数据
           formatMenu(asyncRoutes, loadMenuData)
