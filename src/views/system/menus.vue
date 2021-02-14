@@ -99,11 +99,11 @@
             <el-tag
               v-if="scope.row.status === 0"
               type="info"
-            >未启用</el-tag>
+            >隐藏</el-tag>
             <el-tag
               v-else
               type="success"
-            >已启用</el-tag>
+            >显示</el-tag>
           </template>
 
         </el-table-column>
