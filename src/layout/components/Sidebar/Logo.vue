@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       title: 'GoRbac',
-      logo: 'https://gitee.com/iszmxw/FigureBed/raw/master/images/gorbac/go-logo.png'
+      logo: require('@/assets/style/img/go-logo.png')
     }
   }
 }
