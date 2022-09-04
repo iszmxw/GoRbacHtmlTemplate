@@ -582,6 +582,15 @@ export default {
         if (response.code === 1) {
           this.dialogFormVisibleAdd = false
           this.$message.success(response.msg)
+          this.form = {
+            parent_id: 0,
+            name: null,
+            type: 'page',
+            sort: 0,
+            status: 1,
+            icon: null,
+            route: null
+          }
           this.getList()
         }
       })
