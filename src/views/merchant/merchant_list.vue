@@ -142,7 +142,7 @@ export default {
     },
     async handleOk() {
       const res = await edit(this.merchant)
-      if (res.code === 20000) {
+      if (res.code === 1) {
         this.$message({
           type: 'success',
           message: res.message
@@ -159,7 +159,7 @@ export default {
       })
         .then(async() => {
           const res = await lockStatus({ id: row.id })
-          if (res.code === 20000) {
+          if (res.code === 1) {
             this.$message({
               type: 'success',
               message: res.message

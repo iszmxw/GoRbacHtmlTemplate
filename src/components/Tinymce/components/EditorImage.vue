@@ -67,7 +67,7 @@ export default {
       this.dialogVisible = false
     },
     handleSuccess(response, file) {
-      if (response.code === 20000) {
+      if (response.code === 1) {
         const uid = file.uid
         const objKeyArr = Object.keys(this.listObj)
         for (let i = 0, len = objKeyArr.length; i < len; i++) {

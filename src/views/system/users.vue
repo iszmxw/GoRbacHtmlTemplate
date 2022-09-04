@@ -306,7 +306,7 @@ export default {
         type: 'warning'
       }).then(function() {
         delAccount({ id: row.id }).then(response => {
-          if (response.code === 20000) {
+          if (response.code === 1) {
             that.$message.success(response.msg)
             that.getList()
           }
@@ -316,7 +316,7 @@ export default {
     // 获取路由详情
     getDetail(row) {
       // getMenu({ id: row.id }).then(response => {
-      //   if (response.code === 20000) {
+      //   if (response.code === 1) {
       //     const res = response.data
       //     this.form.id = res.id
       //     this.form.parent_id = res.parent_id

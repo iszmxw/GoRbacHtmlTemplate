@@ -165,7 +165,7 @@ export default {
       this.getCheckedNodes()
       const res = await updateRole(this.role)
       // 修改成功提示
-      if (res.code === 20000) {
+      if (res.code === 1) {
         const { desc, id, name } = this.role
         this.dialogVisibleEdit = false
         this.$notify({

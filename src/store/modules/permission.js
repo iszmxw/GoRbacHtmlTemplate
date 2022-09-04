@@ -111,7 +111,7 @@ const actions = {
       const asyncRoutes = []
       getMenuRoutes().then(response => {
         // console.log(JSON.stringify(response))
-        if (response.code !== 20000) {
+        if (response.code !== 1) {
           Vue.prototype.$message({
             message: '菜单数据加载异常',
             type: 'error'
@@ -121,7 +121,7 @@ const actions = {
         }
 
         // 菜单数据获取成功
-        if (response.code === 20000) {
+        if (response.code === 1) {
           Object.assign(loadMenuData, response.data)
           // 格式化路由菜单数据
           formatMenu(asyncRoutes, loadMenuData)

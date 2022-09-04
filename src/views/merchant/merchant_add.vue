@@ -79,7 +79,7 @@ export default {
   methods: {
     onSubmit() {
       add(this.form).then(res => {
-        if (res.code === 20000) {
+        if (res.code === 1) {
           this.$notify({
             title: '成功',
             message: res.message,

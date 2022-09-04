@@ -39,7 +39,7 @@ export default {
   methods: {
     onSubmit() {
       reset_password(this.form).then(res => {
-        if (res.code === 20000) {
+        if (res.code === 1) {
           this.$message.success(res.message)
           setTimeout(() => {
             location.reload()

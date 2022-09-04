@@ -44,8 +44,8 @@ service.interceptors.response.use(
   response => {
     const res = response.data
 
-    // 如果自定义代码不是20000，则判断为错误。
-    if (res.code !== 20000) {
+    // 如果自定义代码不是1，则判断为错误。
+    if (res.code !== 1) {
       Message({
         message: res.msg || 'error',
         // message: '请求数据错误，响应码' + res.code,

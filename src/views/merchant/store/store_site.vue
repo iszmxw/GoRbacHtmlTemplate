@@ -91,14 +91,14 @@ export default {
   methods: {
     getScene() {
       get_scene().then(res => {
-        if (res.code === 20000) {
+        if (res.code === 1) {
           this.scenes = res.data
         }
       })
     },
     getData() {
       get_store_info(this.$route.query).then(res => {
-        if (res.code === 20000) {
+        if (res.code === 1) {
           if (res.data) {
             this.form = res.data
           }
@@ -107,7 +107,7 @@ export default {
     },
     onSubmit() {
       save_store_info(this.form).then(res => {
-        if (res.code === 20000) {
+        if (res.code === 1) {
           // this.$notify({
           //   title: '提示',
           //   message: res.message,

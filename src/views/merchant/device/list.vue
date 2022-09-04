@@ -159,7 +159,7 @@ export default {
     },
     handlePriceEdit() {
       edit_price(this.form).then(res => {
-        if (res.code === 20000) {
+        if (res.code === 1) {
           this.$message({
             message: res.message,
             type: 'success'
@@ -173,7 +173,7 @@ export default {
       // 将要编辑的模板id
       this.template.device_id = id
       get_template(id).then(response => {
-        if (response.code === 20000) {
+        if (response.code === 1) {
           if (response.template) {
             this.template.id = response.template.id
             this.template.title = response.template.title
